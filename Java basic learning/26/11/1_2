@@ -1,0 +1,33 @@
+public class SquareIntersection {
+
+	public static void main(String[] args) {
+		double x_1=6.0;
+		double y_1=7.0;
+		double x_2=4.0;
+		double y_2=5.0;
+		double L_1=3.0;
+		double L_2=7.0;
+		if(Math.abs(x_1-x_2)>Math.abs(L_1/2+L_2/2)) {
+				System.out.println("The two squares are apart from each other.");							
+		}
+		else if(Math.abs(y_1-y_2)>Math.abs(L_1/2+L_2/2)){
+			    System.out.println("The two squares are apart from each other.");
+		}
+		else {
+			if(Math.abs(x_1-x_2)+L_2/2<=L_1/2&&(Math.abs(y_1-y_2)+L_2/2<=L_1/2)) {
+				System.out.println(" Square1 contains Square2.");
+			}
+			else if((Math.abs(x_1-x_2)+L_1/2<=L_2/2)&&(Math.abs(y_1-y_2)+L_1/2<=L_2/2)) {
+				System.out.println(" Square2 contains Square1.");
+			}
+			else {
+				System.out.println(" Square1 intersects with Square2.");
+			}
+		}
+		
+				
+				
+
+	}
+
+}
