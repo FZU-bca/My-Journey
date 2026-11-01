@@ -1,0 +1,26 @@
+public class ScheduleValidator {
+
+	public static void main(String[] args) {
+		int time_1=1215;
+		int ddltime_1=1130;
+		int time_2=1100;
+		int ddltime_2=1445;
+		if (time_1 <= time_2) {
+			if(ddltime_1<=time_2) {
+				System.out.println("Perfectly scheduled");
+			}
+			else {
+				System.out.println("Appointment1 - Appointment2");
+			}
+		}
+		else {
+			if(ddltime_2<=time_1) {
+			System.out.println("Perfectly scheduled");
+			}
+			else {
+				System.out.println("Appointment2 - Appointment1");
+			}
+		}
+	}
+
+}
