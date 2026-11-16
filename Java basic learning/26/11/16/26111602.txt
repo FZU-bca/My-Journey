@@ -1,0 +1,176 @@
+### A21 【填空】[loop]
+
+```java
+int count = 5;
+int printed = 0;
+while (count < 5)
+{
+    printed++;
+    count++;
+}
+```
+
+循环体执行了几次？`printed` 和 `count` 各是多少？
+0 0 5
+
+
+---
+
+### A23 【填空】[loop] [off-by-one]
+
+对下面两个 `for` 循环，分别填出「循环体执行次数」和「循环结束时 `i` 的值」：
+
+```java
+// (a)
+for (int i = 0; i <= 10; i += 2) { 5 10}
+
+// (b)
+for (int i = 10; i > 0; i -= 3) { 3 1}
+```
+
+---
+
+### A24 【填空】[off-by-one]
+
+```java
+// (a)
+int sum = 0;
+for (int i = 1; i < 10; i++) { sum += i; }
+8次   8
+// (b)
+int sum2 = 0;
+for (int i = 1; i <= 10; i++) { sum2 += i; }
+9次   9
+
+`sum` 和 `sum2` 各是多少？两者差多少？
+9 45 10 55
+---
+
+### A25 【输出预测】[loop]
+
+```java
+public class A25
+{
+    public static void main(String args[])
+    {
+        int count = 10;
+        while (count > 0)
+        {
+            System.out.print(count + " ");
+            count--;
+        }
+        System.out.println();
+        System.out.println("after the loop count = " + count);
+    }
+}
+```
+
+写出完整输出。
+10 9 8 7 6 5 4 3 2 1
+0
+---
+
+### A26 【选择】[infinite-loop]
+
+下列哪一段代码会产生**死循环**（永远不会结束）？
+
+```java
+// A
+int c = 0;
+while (c < 10) { c++; }
+
+// B
+int c = 0;
+while (c < 10) { c--; }
+
+// C
+int c = 10;
+while (c > 0) { c--; }
+
+// D
+for (int i = 0; i < 10; i++) { }
+```
+B
+---
+
+### A27 【选择】[infinite-loop]
+
+```java
+int i = 0;
+while (i < 5);
+{
+    i++;
+}
+```
+
+这段代码会怎样？
+
+- A. 编译错误
+- B. 死循环，因为 `while (i < 5);` 后面那个分号让循环体变成了空语句
+- C. 正常输出 0 到 4
+- D. 循环体只执行一次后正常结束
+B
+---
+
+### A28 【输出预测】[digit-extraction]
+
+```java
+public class A28
+{
+    public static void main(String args[])
+    {
+        int num = 4729, sum = 0;
+        while (num > 0)
+        {
+            sum += num % 10;
+            num /= 10;
+        }
+        System.out.println("sum = " + sum + ", num = " + num);
+    }
+}
+```
+
+写出输出。
+22 0
+---
+
+### A29 【填空】[nested-loop]
+
+```java
+int stars = 0;
+for (int i = 0; i < 3; i++)
+{
+    for (int j = 0; j < 4; j++)
+    {
+        stars++;
+    }
+}
+```
+
+`stars` 最后是多少？外层循环执行几次？内层一共执行几次？
+12 外层三次 内层十二次 
+---
+
+### A30 【输出预测】[accumulator]
+
+```java
+public class A30
+{
+    public static void main(String args[])
+    {
+        int sum = 0;
+        for (int i = 1; i <= 20; i++)
+        {
+            if (i % 2 != 0)
+            {
+                sum += i;
+            }
+        }
+        System.out.println("sum = " + sum);
+    }
+}
+```
+
+写出输出。
+1+3+5+7+9+11+13+15+17+19=  10
+---
