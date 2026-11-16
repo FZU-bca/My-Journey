@@ -1,0 +1,420 @@
+# CS161FZ《计算机导论》Programming Test 1 · 练习题集
+
+### Selection（选择结构）+ Loop / Iteration（循环）
+
+> 老师黑板原话：**Programming Test 1，满分 10 分，11 月 22 日，2 小时，开卷（open book），2 道大题，考点是 selection 与 loop / iteration。**
+
+| 项目 | 信息 |
+| --- | --- |
+| 课程 | CS161FZ Introduction to Computer Science |
+| 考试 | Programming Test 1 |
+| 日期 | 2026-11-22（周日） |
+| 时长 | 2 小时 |
+| 形式 | 开卷（open book）：可带课件、笔记、Java API 打印稿 |
+| 满分 | 10 分 |
+| 题量 | 2 道大题（以编程题为主，可能带「写出输出」小问） |
+| 考点 | ① **Selection**：关系运算符、`&`/`\|`/`^`、`&&`/`\|\|`、`if` / `if-else` / `if-else if-else`、`switch`、三元运算符<br>② **Loop / Iteration**：`while` / `for` / `do…while`、循环三要素、嵌套、累加、拆位、差一错误、死循环 |
+| 命题依据 | Lecture 5（Relational and Boolean Operators for Selections）、Lecture 6（Flow Control: Loops）、Lecture 7（String） |
+
+---
+
+## 0 怎么用这本练习集
+
+**核心原则：答案只在最后。** 先整段限时做完，再翻 §4 对答案；不要做一题看一眼答案，那样练不出考场手感。
+
+### 0.1 三轮用法（照做，别跳步）
+
+| 轮次 | 时间安排 | 做什么 | 过关标准 |
+| --- | --- | --- | --- |
+| 第 1 轮 · 摸底 | 60 分钟，一次做完 A 级 30 题（每题 1.5–2 分钟，超时就先猜一个标记） | 只看题面，不翻书不翻答案 | 对 ≥ 24 题算及格；把错题号抄进 §5 记录表 |
+| 第 2 轮 · 上机 | 90 分钟，B 级挑 4 题 + C 级挑 2 题，**真的在 Eclipse 里打出来跑通** | 先自己写，卡住 15 分钟再看参考代码 | 能不看答案独立写出 `main` 并跑出样例输出 |
+| 第 3 轮 · 二刷 | 考前一天 45 分钟 | 只做 §5 里「二刷未通过」的题号，重做 A 级错题 + 重写 B/C 错题的代码 | 错题全部能不看答案讲出为什么错 |
+
+### 0.2 三条纪律
+
+1. **A 级必须全对**。A 级考的都是「一眼看出来」的语义细节（`==` 和 `=`、`&&` 和 `&`、switch 贯穿、差一），这些在考卷上值 1–2 分的送分小题，错一个就是白丢分。
+2. **B 级按「手写代码」的标准练**。开卷考试允许翻课件，但**时间只有 2 小时、只有 2 道大题**，翻书的时间必须省给调试。熟练度只能靠手打出来。
+3. **错题必写原因**。§5 的表格里「错因」一栏不能写「粗心」「不会」——要写具体机制，例如「switch 的 case 2 后面漏了 break，贯穿到 case 3」。写不出机制，说明这题还没真懂，标成二刷重点。
+
+### 0.3 关于代码环境
+
+- 本集所有 Java 代码都用 `javac` / `java` **真实编译并运行过**，输出与 §4 的答案逐字一致（JDK 25 验证，语法只用 Java 7 就支持的写法，Eclipse 4.10 + JDK 11 可以原样跑）。
+- 每个程序都是独立文件：文件名 = `public class` 的名字，例如 `B01.java` 里写 `public class B01`。
+- 课上讲过 `Scanner` 就用 `Scanner` 版；**考试更可能是「把变量写死」**（题目直接给 `num1 = 17` 这种），所以涉及输入的题都**同时给了「硬编码变量版」**——两种都要会写。
+
+### 0.4 考察点标签速查
+
+| 标签 | 含义 | 出现位置 |
+| --- | --- | --- |
+| `[precedence]` | 运算符优先级与结合性 | A01–A05, A10 |
+| `[integer-division]` | 整数除法 / 取余的陷阱 | A03, A04, A24, B02 |
+| `[short-circuit]` | 短路求值 `&&` `\|\|` 与不短路的 `&` `\|` | A06–A08 |
+| `[truth-table]` | `&` `\|` `^` 真值表 | A09 |
+| `[selection]` | if / if-else / if-else-if 结构 | A11–A13, B01, B11 |
+| `[switch-fallthrough]` | switch 的贯穿、break、default 位置 | A15–A17, B06 |
+| `[ternary]` | 三元运算符 | A18, A19 |
+| `[loop]` | while / for / do…while 基本结构 | A20–A23, B03–B08 |
+| `[do-while]` | 先执行后判断，至少一次 | A22 |
+| `[off-by-one]` | 差一错误（`<` 与 `<=`） | A23, A24, B09 |
+| `[infinite-loop]` | 死循环识别 | A26, A27 |
+| `[nested-loop]` | 嵌套循环 | A29, B07, C01, C03, C08 |
+| `[digit-extraction]` | 拆位（`%10`、`/10`、`/100`） | A28, B02, B09, B10, C04, C05 |
+| `[accumulator]` | 累加器 / 计数器模式 | A30, B03, B04, C10 |
+| `[string-loop]` | 用循环遍历 String | B12, C09 |
+| `[boolean-ops]` | 布尔运算符组合判断 | A09, B11 |
+
+---
+
+## 1 A 级 · 基础（必须全对，30 题）
+
+> 建议一次性限时 60 分钟做完。题号后面的方括号是考察点标签，方便错题归类。
+> 题型说明：**【选择】** 单选；**【填空】** 填一个值或一个数；**【输出预测】** 写出程序完整输出（注意换行）。
+
+### A01 【输出预测】[precedence]
+
+```java
+public class A01
+{
+    public static void main(String args[])
+    {
+        int result = 1 - 2 * 3 - 4 + 5;
+        System.out.println("The result is: " + result);
+    }
+}
+```
+
+-3
+---
+
+### A02 【填空】[precedence]
+
+```java
+int x = 3 + 20 / 5 + 6 + 5 + 5 * 4;
+```
+
+`x` 的值是多少？
+38
+---
+
+### A03 【输出预测】[integer-division]
+
+```java
+public class A03
+{
+    public static void main(String args[])
+    {
+        int num1 = 4, num2 = 5, num3 = 6, result = 0;
+
+        result = num1 + num2 + num3 / 3;
+        System.out.println("The result is: " + result);
+
+        result = (num1 + num2 + num3) / 3;
+        System.out.println("The result is: " + result);
+    }
+}
+```
+
+写出完整输出（两行）。
+11
+5
+---
+
+### A04 【填空】[precedence]
+
+```java
+int x = 2 + 3 * 4 % 5 - 1;
+```
+
+`x` 的值是多少？
+3
+---
+
+### A05 【输出预测】[precedence]
+
+```java
+int a = 3 + 15 - 9 % 4;
+int b = 3 + (15 - 9) % 4;
+System.out.println(a + " " + b);
+```
+
+写出输出。
+17 5
+---
+
+### A06 【输出预测】[short-circuit]
+
+```java
+public class A06
+{
+    public static void main(String args[])
+    {
+        int i = 0;
+        boolean b = (i++ > 0) && (i++ > 0);
+        System.out.println("i = " + i + ", b = " + b);
+    }
+}
+```
+false
+写出输出。
+
+---
+
+### A07 【输出预测】[short-circuit]
+
+```java
+public class A07
+{
+    public static void main(String args[])
+    {
+        int i = 0;
+        boolean b = (i++ > 0) || (i++ > 0);
+        System.out.println("i = " + i + ", b = " + b);
+    }
+}
+```
+
+写出输出。
+false
+---
+
+### A08 【输出预测】[short-circuit]
+
+```java
+public class A08
+{
+    public static void main(String args[])
+    {
+        int i = 0;
+        boolean b = (i++ > 0) & (i++ > 0);
+        System.out.println("i = " + i + ", b = " + b);
+    }
+}
+```
+
+写出输出，并说明它和 A06 的区别。
+false
+---
+
+### A09 【填空】[truth-table]
+
+已知 `int num1 = 5, num2 = 7, num3 = 5;`，填出下面六个表达式的值（`true` 或 `false`）：
+
+```java
+num1 == 5 & num2 == 5      // (1)true
+num1 == 5 & num3 == 5      // (2)true
+num1 == 5 | num2 == 5      // (3)true
+num1 == 5 | num3 == 5      // (4)true
+num1 == 5 ^ num2 == 5      // (5)false
+num1 == 5 ^ num3 == 5      // (6)false
+```
+
+---
+
+### A10 【填空】[precedence]
+
+```java
+boolean x = true || false && false;
+boolean y = (true || false) && false;
+```
+
+`x` 和 `y` 各是多少？
+true false
+---
+
+### A11 【选择】[selection]
+
+下面哪一行代码**正确地**判断整数变量 `x` 是否等于 10？
+
+- A. `if (x = 10)`
+- B. `if (x == 10)`
+- C. `if (x.equals(10))`
+- D. `if (x := 10)`
+B
+---
+
+### A12 【输出预测】[selection]
+
+```java
+public class A12
+{
+    public static void main(String args[])
+    {
+        boolean flag = false;
+        if (flag = true)
+        {
+            System.out.println("Yes");
+        }
+        else
+        {
+            System.out.println("No");
+        }
+        System.out.println("flag is now " + flag);
+    }
+}
+```
+
+问：(1) 这段代码能编译通过吗？(2) 如果能，输出是什么？
+能 false**true
+---
+
+### A13 【输出预测】[selection]
+
+```java
+public class A13
+{
+    public static void main(String args[])
+    {
+        int mark = 65;
+        if (mark >= 70)
+        {
+            System.out.println("Distinction");
+        }
+        else if (mark >= 60)
+        {
+            System.out.println("Merit");
+        }
+        else if (mark >= 50)
+        {
+            System.out.println("Pass");
+        }
+        else
+        {
+            System.out.println("Fail");
+        }
+    }
+}
+```
+
+问：(1) 输出是什么？(2) 如果把三个 `else if` 全部改成独立的 `if`（结构见下），输出又会变成什么？
+会变成两行输出 Merit Pass
+```java
+if (mark >= 70) { System.out.println("Distinction"); }
+if (mark >= 60) { System.out.println("Merit"); }
+if (mark >= 50) { System.out.println("Pass"); }
+else            { System.out.println("Fail"); }
+```
+
+---
+
+### A14 【输出预测】[selection]
+
+```java
+public class A14
+{
+    public static void main(String args[])
+    {
+        int x = 15;
+        if (x > 10)
+            if (x > 20)
+                System.out.println("A");
+            else
+                System.out.println("B");
+        System.out.println("C");
+    }
+}
+```
+
+写出完整输出。
+B C
+---
+
+### A15 【输出预测】[switch-fallthrough]
+
+```java
+public class A15
+{
+    public static void main(String args[])
+    {
+        int x = 2;
+        switch (x)
+        {
+            case 1: System.out.println("One");
+            case 2: System.out.println("Two");
+            case 3: System.out.println("Three");
+            case 4: System.out.println("Four");
+            default: System.out.println("Done");
+        }
+    }
+}
+```
+
+写出完整输出，并解释为什么会这样。
+two three four done
+---
+
+### A16 【输出预测】[switch-fallthrough]
+
+```java
+public class A16
+{
+    public static void main(String args[])
+    {
+        int code = 3;
+        switch (code)
+        {
+            case 1: System.out.println("One"); break;
+            default: System.out.println("Default");
+            case 4: System.out.println("Four"); break;
+            case 5: System.out.println("Five");
+        }
+    }
+}
+```
+
+写出完整输出。
+Default Four
+---
+
+### A18 【填空】[ternary]
+
+```java
+int a = -100, b = 20;
+int min = (a < b) ? a : b;
+int max = (a > b) ? a : b;
+int abs = (a < 0) ? -a : a;
+```
+
+`min`、`max`、`abs` 各是多少？
+-100 20 100
+---
+
+### A19 【输出预测】[ternary]
+
+```java
+public class A19
+{
+    public static void main(String args[])
+    {
+        double number1 = -15.5, number2 = 10.2, sum = 0.0;
+        sum = number1 - number2;
+        char result = (sum > 0.0) ? '+' : '-';
+        System.out.println("sum is " + result);
+    }
+}
+```
+
+写出完整输出。注意：输出的不是 `sum` 的数值。
+sum is -
+---
+
+### A20 【输出预测】[loop]
+
+```java
+public class A20
+{
+    public static void main(String args[])
+    {
+        int count = 13, rounds = 0;
+        while (count <= 20)
+        {
+            rounds++;
+            count++;
+        }
+        System.out.println("rounds = " + rounds + ", count = " + count);
+    }
+}
+```
+
+写出输出：循环体执行了几次？循环结束后 `count` 是多少？
+8次 21
+---
