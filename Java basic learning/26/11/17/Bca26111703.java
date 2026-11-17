@@ -1,17 +1,10 @@
-public class Bca26111703 {
-    public static void main(String[]args){
-        int sumDiv=0;
-        int sumSqa=0;
-        for(int i=1;i<=100;i++){
-            if((i%13)==0)sumDiv+=1;
-            sumSqa+=i*i;
-        }
-        System.out.println("The sum of all numbers divisible by 13 is"+sumDiv);
-        System.out.print("The sum of all squares is"+sumSqa);
-
-
+public class Bca26111703 {public static void main(String[] args) {
+    int num = 7 ;
+    for(int i = 2 ; i <= 70; i++) {
+        if (num * i < 70)
+            System.out.print(num * i + " ");
+        else
+            System.out.println(num * i);
     }
-
-
-
+}
 }
