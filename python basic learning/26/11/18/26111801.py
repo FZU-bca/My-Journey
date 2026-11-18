@@ -1,0 +1,11 @@
+f=open("D:/text.txt","a",encoding="utf-8")
+f.write("Sakanaction")
+f.flush()
+f.close()
+f=open("D:/text.txt","a",encoding="utf-8")
+f.write("Vaundy")
+f.close()
+#"a" means add, which is dif from w, "w" will cover the source message
+f=open("D:/text.txt","a",encoding="utf-8")
+f.write("\nmy favorite singer")
+f.close()
