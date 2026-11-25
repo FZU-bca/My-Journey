@@ -17,5 +17,7 @@ class Student:
 if __name__=="__main__":
     s1=Student("YSW",90,88,92)
     print(s1)
+    s1.updateScore(gradeC=82)
+    print(s1)
 
 
